@@ -1,0 +1,186 @@
+/**
+ * Virtualcode Click to Chat Frontend Styles
+ * 
+ * Animations and styles for the chat button
+ * Optimized for performance with accessibility considerations
+ * 
+ * @package Virtualcode_Click_To_Chat
+ */
+
+/* =============================================
+   Base Button Styles
+   ============================================= */
+
+.vc-floating-button,
+.vc-shortcode-button {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    will-change: transform, box-shadow;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ensure proper focus styles for accessibility */
+.vc-floating-button:focus,
+.vc-shortcode-button:focus {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+}
+
+/* =============================================
+   Entrance Animation
+   ============================================= */
+
+@keyframes vc-entrance {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.vc-entrance {
+    animation: vc-entrance 0.5s ease-out forwards;
+}
+
+/* =============================================
+   Hover Animations
+   ============================================= */
+
+.vc-floating-button:hover,
+.vc-shortcode-button:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+    filter: brightness(1.05);
+}
+
+/* Icon animation on hover */
+.vc-floating-button:hover img,
+.vc-shortcode-button:hover img {
+    animation: vc-icon-wiggle 0.6s ease-in-out;
+}
+
+@keyframes vc-icon-wiggle {
+    0%   { transform: rotate(0deg) scale(1); }
+    25%  { transform: rotate(-6deg) scale(1.1); }
+    50%  { transform: rotate(6deg) scale(1.1); }
+    75%  { transform: rotate(-3deg) scale(1.05); }
+    100% { transform: rotate(0deg) scale(1); }
+}
+
+/* =============================================
+   Active/Click Animation
+   ============================================= */
+
+.vc-floating-button:active,
+.vc-shortcode-button:active {
+    transform: translateY(0) scale(0.96);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Ripple effect on click */
+.vc-floating-button:active::after,
+.vc-shortcode-button:active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: inherit;
+    animation: vc-ripple 0.3s ease-out;
+    pointer-events: none;
+}
+
+@keyframes vc-ripple {
+    0% {
+        opacity: 0.6;
+        transform: scale(0);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+/* =============================================
+   Button Text
+   ============================================= */
+
+.vc-button-text {
+    display: inline-block;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+/* =============================================
+   Accessibility: Reduced Motion
+   ============================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .vc-floating-button,
+    .vc-shortcode-button,
+    .vc-floating-button *,
+    .vc-shortcode-button *,
+    .vc-entrance {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+    }
+    
+    .vc-floating-button:hover,
+    .vc-shortcode-button:hover {
+        transform: none !important;
+        filter: brightness(1.05);
+    }
+    
+    .vc-floating-button:active::after,
+    .vc-shortcode-button:active::after {
+        display: none !important;
+    }
+}
+
+/* Add class for reduced motion preference */
+.reduce-motion .vc-floating-button,
+.reduce-motion .vc-shortcode-button,
+.reduce-motion .vc-floating-button *,
+.reduce-motion .vc-shortcode-button * {
+    animation: none !important;
+    transition: none !important;
+}
+
+/* =============================================
+   Responsive Design
+   ============================================= */
+
+@media (max-width: 768px) {
+    .vc-floating-button {
+        /* Ensure button is touch-friendly on mobile */
+        padding: 12px !important;
+    }
+    
+    .vc-floating-button .vc-button-text {
+        font-size: 14px !important;
+    }
+}
+
+/* =============================================
+   Print Styles
+   ============================================= */
+
+@media print {
+    .vc-floating-button,
+    .vc-shortcode-button {
+        display: none !important;
+    }
+}

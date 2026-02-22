@@ -1,0 +1,135 @@
+/**
+ * Virtualcode Click to Chat Field-Dependent Styles
+ * Styles for fields that are disabled based on selections
+ * 
+ * @package Virtualcode_Click_To_Chat
+ */
+
+/* =============================================
+   Text-Dependent Fields (Appearance Tab)
+   ============================================= */
+
+.vc-text-dependent-fields {
+	transition: opacity 0.2s ease;
+}
+
+/* When fields are disabled via JavaScript */
+.vc-text-dependent-fields.vc-text-disabled {
+	opacity: 0.6;
+}
+
+/* Style for disabled inputs - using both attribute and class for redundancy */
+.vc-text-dependent-fields input:disabled,
+.vc-text-dependent-fields.vc-text-disabled input {
+	background-color: #f0f0f1 !important;
+	cursor: not-allowed !important;
+	border-color: #dcdcde !important;
+	color: #8c8f94 !important;
+}
+
+/* Style for color picker when disabled */
+.vc-text-dependent-fields .wp-color-picker:disabled,
+.vc-text-dependent-fields.vc-text-disabled .wp-color-picker {
+	opacity: 0.7;
+}
+
+.vc-text-dependent-fields .wp-picker-container .button:disabled,
+.vc-text-dependent-fields .wp-picker-container .button[disabled],
+.vc-text-dependent-fields.vc-text-disabled .wp-picker-container .button {
+	opacity: 0.6;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+/* Ensure disabled fields are clearly visible */
+.vc-text-dependent-fields input:disabled + label,
+.vc-text-dependent-fields input:disabled ~ .description,
+.vc-text-dependent-fields.vc-text-disabled input + label,
+.vc-text-dependent-fields.vc-text-disabled input ~ .description {
+	color: #8c8f94;
+}
+
+/* Focus state for accessibility when enabled */
+.vc-text-dependent-fields input:not(:disabled):focus {
+	outline: 2px solid #2271b1;
+	outline-offset: 1px;
+}
+
+/* =============================================
+   Page Targeting Dependent Fields (Advanced Tab)
+   ============================================= */
+
+.vc-page-targeting-dependent {
+	transition: opacity 0.2s ease;
+}
+
+.vc-page-targeting-dependent.vc-page-disabled {
+	opacity: 0.6;
+}
+
+.vc-page-targeting-dependent input:disabled,
+.vc-page-targeting-dependent.vc-page-disabled input {
+	cursor: not-allowed;
+	background-color: #f0f0f1;
+}
+
+.vc-page-targeting-dependent input:disabled + label,
+.vc-page-targeting-dependent.vc-page-disabled input + label {
+	color: #8c8f94;
+}
+
+.vc-page-targeting-dependent input:focus {
+	outline: 2px solid #2271b1;
+	outline-offset: 1px;
+}
+
+/* =============================================
+   Business Hours Dependent Fields (Advanced Tab)
+   ============================================= */
+
+.vc-business-hours-fields {
+	transition: opacity 0.2s ease;
+}
+
+.vc-business-hours-fields.vc-business-disabled {
+	opacity: 0.6;
+}
+
+.vc-business-hours-fields input:disabled,
+.vc-business-hours-fields.vc-business-disabled input {
+	cursor: not-allowed;
+	background-color: #f0f0f1;
+}
+
+.vc-business-hours-fields input:disabled + label,
+.vc-business-hours-fields.vc-business-disabled input + label {
+	color: #8c8f94;
+}
+
+.vc-business-hours-fields input:focus {
+	outline: 2px solid #2271b1;
+	outline-offset: 1px;
+}
+
+.vc-business-hours-fields label {
+	white-space: nowrap;
+}
+
+/* =============================================
+   Responsive Adjustments
+   ============================================= */
+
+@media screen and (max-width: 782px) {
+	.vc-business-hours-fields label {
+		display: inline-block;
+		width: auto;
+		margin-right: 12px;
+		margin-bottom: 8px;
+		white-space: normal;
+	}
+	
+	.vc-page-targeting-dependent label,
+	.vc-text-dependent-fields label {
+		margin-bottom: 6px;
+	}
+}

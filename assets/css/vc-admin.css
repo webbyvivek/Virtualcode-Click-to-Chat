@@ -1,0 +1,218 @@
+/**
+ * Virtualcode Click to Chat Admin Styles
+ * Optimized to work with WordPress default UI/UX
+ */
+
+/* Color picker - keep functional */
+.vc-color-field {
+	max-width: 120px;
+}
+
+/* Page targeting checkboxes container */
+.vc-page-checkboxes {
+	max-height: 250px;
+	overflow-y: auto;
+	padding: 8px 12px;
+	background: #fff;
+	border: 1px solid #8c8f94;
+	border-radius: 4px;
+	margin: 4px 0;
+}
+
+/* Checkbox items styling */
+.vc-page-checkboxes label {
+	display: block;
+	margin: 3px 0;
+	padding: 2px 6px;
+}
+
+.vc-page-checkboxes label:hover {
+	background: #f0f0f1;
+}
+
+/* Business hours checkboxes inline */
+.form-table td .vc-business-days-group label {
+	display: inline-block;
+	margin-right: 15px;
+	white-space: nowrap;
+}
+
+/* Time inputs */
+input[type="time"] {
+	width: 120px;
+}
+
+/* Gap between related fields */
+.form-table td .field-group {
+	margin: 8px 0;
+}
+
+/* =============================================
+   Toggle Switch Styles - WordPress Default Design
+   ============================================= */
+
+.toggle-label {
+	display: inline-flex;
+	align-items: center;
+	cursor: pointer;
+	position: relative;
+}
+
+.toggle-label input[type="checkbox"] {
+	position: absolute;
+	left: -9999px;
+	opacity: 0;
+}
+
+.toggle-switch {
+	display: inline-block;
+	width: 40px;
+	height: 20px;
+	background-color: #ccc;
+	border-radius: 20px;
+	position: relative;
+	margin-right: 10px;
+	transition: background-color 0.2s ease;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-switch:before {
+	content: '';
+	position: absolute;
+	width: 18px;
+	height: 18px;
+	background-color: #fff;
+	border-radius: 50%;
+	top: 1px;
+	left: 1px;
+	transition: transform 0.2s ease;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-label input[type="checkbox"]:checked + .toggle-switch {
+	background-color: #2271b1; /* WordPress primary color */
+}
+
+.toggle-label input[type="checkbox"]:checked + .toggle-switch:before {
+	transform: translateX(20px);
+}
+
+.toggle-label input[type="checkbox"]:focus + .toggle-switch {
+	box-shadow: 0 0 0 1px #fff, 0 0 0 3px #2271b1;
+}
+
+.toggle-text {
+	font-size: 13px;
+	color: #1e1e1e;
+}
+
+/* Disabled state */
+.toggle-label input[type="checkbox"]:disabled + .toggle-switch {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+/* =============================================
+   Simple Button Position Toggle (Left/Right)
+   ============================================= */
+
+.vc-simple-toggle {
+	display: inline-flex;
+	border: 1px solid #8c8f94;
+	border-radius: 4px;
+	overflow: hidden;
+	background: #f0f0f1;
+}
+
+.vc-simple-toggle input[type="radio"] {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.vc-simple-toggle label {
+	display: inline-block;
+	padding: 6px 20px;
+	font-size: 13px;
+	font-weight: 500;
+	color: #50575e;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	text-align: center;
+	min-width: 70px;
+	border-right: 1px solid #8c8f94;
+}
+
+.vc-simple-toggle label:last-child {
+	border-right: none;
+}
+
+/* Active state */
+.vc-simple-toggle label.active {
+	background: #2271b1;
+	color: #fff;
+}
+
+/* Hover state */
+.vc-simple-toggle label:hover {
+	background: #fff;
+}
+
+.vc-simple-toggle label.active:hover {
+	background: #135e96;
+}
+
+/* Focus state */
+.vc-simple-toggle input[type="radio"]:focus + label {
+	outline: 2px solid #2271b1;
+	outline-offset: 2px;
+	position: relative;
+	z-index: 1;
+}
+
+/* =============================================
+   Responsive Adjustments
+   ============================================= */
+
+@media screen and (max-width: 782px) {
+	.vc-page-checkboxes {
+		max-height: 200px;
+	}
+	
+	.form-table td .vc-business-days-group label {
+		display: inline-block;
+		width: auto;
+		margin-right: 12px;
+		margin-bottom: 8px;
+	}
+	
+	input[type="time"] {
+		width: 130px;
+	}
+	
+	.wp-picker-container {
+		white-space: normal;
+	}
+	
+	.toggle-switch {
+		width: 36px;
+		height: 18px;
+	}
+	
+	.toggle-switch:before {
+		width: 16px;
+		height: 16px;
+	}
+	
+	.toggle-label input[type="checkbox"]:checked + .toggle-switch:before {
+		transform: translateX(18px);
+	}
+	
+	/* Simple toggle responsive */
+	.vc-simple-toggle label {
+		padding: 4px 15px;
+		min-width: 60px;
+		font-size: 12px;
+	}
+}
