@@ -8,15 +8,15 @@
 defined( 'ABSPATH' ) || exit;
 
 // Load options with defaults.
-$vc_defaults = virtualcode_click_to_chat_get_default_options();
-$vc_options  = (array) get_option( 'virtualcode_click_to_chat_settings', $vc_defaults );
-$vc_options  = wp_parse_args( $vc_options, $vc_defaults );
+$virtualcode_click_to_chat_defaults = virtualcode_click_to_chat_get_default_options();
+$virtualcode_click_to_chat_options  = (array) get_option( 'virtualcode_click_to_chat_settings', $virtualcode_click_to_chat_defaults );
+$virtualcode_click_to_chat_options  = wp_parse_args( $virtualcode_click_to_chat_options, $virtualcode_click_to_chat_defaults );
 
 // Device target - FIXED: Use prefixed variable name
-$vc_device_target = isset( $vc_options['device_target'] ) ? $vc_options['device_target'] : 'both';
+$virtualcode_click_to_chat_device_target = isset( $virtualcode_click_to_chat_options['device_target'] ) ? $virtualcode_click_to_chat_options['device_target'] : 'both';
 
 // Get enabled status - FIXED: Use prefixed variable name
-$vc_enabled = ! empty( $vc_options['enabled'] );
+$virtualcode_click_to_chat_enabled = ! empty( $virtualcode_click_to_chat_options['enabled'] );
 ?>
 
 <form method="post" action="options.php" id="vc-general-form">
@@ -42,12 +42,12 @@ $vc_enabled = ! empty( $vc_options['enabled'] );
 							id="vc_enabled"
 							name="virtualcode_click_to_chat_settings[enabled]"
 							value="1"
-							<?php checked( $vc_enabled ); ?>
+							<?php checked( $virtualcode_click_to_chat_enabled ); ?>
 							aria-describedby="vc-enabled-description"
 						/>
 						<span class="toggle-switch"></span>
 						<span class="toggle-text">
-							<?php echo $vc_enabled ? esc_html__( 'Enabled', 'virtualcode-click-to-chat' ) : esc_html__( 'Disabled', 'virtualcode-click-to-chat' ); ?>
+							<?php echo $virtualcode_click_to_chat_enabled ? esc_html__( 'Enabled', 'virtualcode-click-to-chat' ) : esc_html__( 'Disabled', 'virtualcode-click-to-chat' ); ?>
 						</span>
 					</label>
 					<p id="vc-enabled-description" class="description">
@@ -68,7 +68,7 @@ $vc_enabled = ! empty( $vc_options['enabled'] );
 						type="tel"
 						id="vc_phone"
 						name="virtualcode_click_to_chat_settings[phone]"
-						value="<?php echo esc_attr( $vc_options['phone'] ); ?>"
+						value="<?php echo esc_attr( $virtualcode_click_to_chat_options['phone'] ); ?>"
 						class="regular-text"
 						placeholder="919876543210"
 						autocomplete="off"
@@ -96,7 +96,7 @@ $vc_enabled = ! empty( $vc_options['enabled'] );
 						class="large-text"
 						style="max-width: 450px;"
 						aria-describedby="vc-message-description"
-					><?php echo esc_textarea( $vc_options['message'] ); ?></textarea>
+					><?php echo esc_textarea( $virtualcode_click_to_chat_options['message'] ); ?></textarea>
 					<p id="vc-message-description" class="description">
 						<?php esc_html_e( 'This message will be pre-filled in the WhatsApp chat.', 'virtualcode-click-to-chat' ); ?>
 					</p>
@@ -120,7 +120,7 @@ $vc_enabled = ! empty( $vc_options['enabled'] );
 								id="vc_device_target_both"
 								name="virtualcode_click_to_chat_settings[device_target]"
 								value="both"
-								<?php checked( $vc_device_target, 'both' ); ?>
+								<?php checked( $virtualcode_click_to_chat_device_target, 'both' ); ?>
 							/>
 							<?php esc_html_e( 'All Devices', 'virtualcode-click-to-chat' ); ?>
 						</label>
@@ -131,7 +131,7 @@ $vc_enabled = ! empty( $vc_options['enabled'] );
 								id="vc_device_target_desktop"
 								name="virtualcode_click_to_chat_settings[device_target]"
 								value="desktop"
-								<?php checked( $vc_device_target, 'desktop' ); ?>
+								<?php checked( $virtualcode_click_to_chat_device_target, 'desktop' ); ?>
 							/>
 							<?php esc_html_e( 'Desktop Only', 'virtualcode-click-to-chat' ); ?>
 						</label>
@@ -142,7 +142,7 @@ $vc_enabled = ! empty( $vc_options['enabled'] );
 								id="vc_device_target_mobile"
 								name="virtualcode_click_to_chat_settings[device_target]"
 								value="mobile"
-								<?php checked( $vc_device_target, 'mobile' ); ?>
+								<?php checked( $virtualcode_click_to_chat_device_target, 'mobile' ); ?>
 							/>
 							<?php esc_html_e( 'Mobile Only', 'virtualcode-click-to-chat' ); ?>
 						</label>
