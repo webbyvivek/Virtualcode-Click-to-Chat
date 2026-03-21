@@ -10,28 +10,28 @@
 defined( 'ABSPATH' ) || exit;
 
 // Load defaults & options safely.
-$vc_defaults = function_exists( 'virtualcode_click_to_chat_get_default_options' ) ? virtualcode_click_to_chat_get_default_options() : array();
-$vc_options  = (array) get_option( 'virtualcode_click_to_chat_settings', $vc_defaults );
-$vc_options  = wp_parse_args( $vc_options, $vc_defaults );
+$virtualcode_click_to_chat_defaults = function_exists( 'virtualcode_click_to_chat_get_default_options' ) ? virtualcode_click_to_chat_get_default_options() : array();
+$virtualcode_click_to_chat_options  = (array) get_option( 'virtualcode_click_to_chat_settings', $virtualcode_click_to_chat_defaults );
+$virtualcode_click_to_chat_options  = wp_parse_args( $virtualcode_click_to_chat_options, $virtualcode_click_to_chat_defaults );
 
 // Values.
-$vc_page_targeting_mode = ! empty( $vc_options['page_targeting_mode'] ) ? $vc_options['page_targeting_mode'] : 'all';
-$vc_include_pages       = ! empty( $vc_options['include_pages'] ) && is_array( $vc_options['include_pages'] ) ? $vc_options['include_pages'] : array();
-$vc_exclude_pages       = ! empty( $vc_options['exclude_pages'] ) && is_array( $vc_options['exclude_pages'] ) ? $vc_options['exclude_pages'] : array();
-$vc_delay_seconds       = isset( $vc_options['delay_seconds'] ) ? absint( $vc_options['delay_seconds'] ) : 0;
+$virtualcode_click_to_chat_page_targeting_mode = ! empty( $virtualcode_click_to_chat_options['page_targeting_mode'] ) ? $virtualcode_click_to_chat_options['page_targeting_mode'] : 'all';
+$virtualcode_click_to_chat_include_pages       = ! empty( $virtualcode_click_to_chat_options['include_pages'] ) && is_array( $virtualcode_click_to_chat_options['include_pages'] ) ? $virtualcode_click_to_chat_options['include_pages'] : array();
+$virtualcode_click_to_chat_exclude_pages       = ! empty( $virtualcode_click_to_chat_options['exclude_pages'] ) && is_array( $virtualcode_click_to_chat_options['exclude_pages'] ) ? $virtualcode_click_to_chat_options['exclude_pages'] : array();
+$virtualcode_click_to_chat_delay_seconds       = isset( $virtualcode_click_to_chat_options['delay_seconds'] ) ? absint( $virtualcode_click_to_chat_options['delay_seconds'] ) : 0;
 
 // Business hours values.
-$vc_business_enabled    = ! empty( $vc_options['business_hours_enabled'] );
-$vc_business_days       = ! empty( $vc_options['business_days'] ) && is_array( $vc_options['business_days'] ) ? $vc_options['business_days'] : array();
-$vc_business_start_time = ! empty( $vc_options['business_start_time'] ) ? $vc_options['business_start_time'] : '09:00';
-$vc_business_end_time   = ! empty( $vc_options['business_end_time'] ) ? $vc_options['business_end_time'] : '18:00';
+$virtualcode_click_to_chat_business_enabled    = ! empty( $virtualcode_click_to_chat_options['business_hours_enabled'] );
+$virtualcode_click_to_chat_business_days       = ! empty( $virtualcode_click_to_chat_options['business_days'] ) && is_array( $virtualcode_click_to_chat_options['business_days'] ) ? $virtualcode_click_to_chat_options['business_days'] : array();
+$virtualcode_click_to_chat_business_start_time = ! empty( $virtualcode_click_to_chat_options['business_start_time'] ) ? $virtualcode_click_to_chat_options['business_start_time'] : '09:00';
+$virtualcode_click_to_chat_business_end_time   = ! empty( $virtualcode_click_to_chat_options['business_end_time'] ) ? $virtualcode_click_to_chat_options['business_end_time'] : '18:00';
 
 // Fetch pages.
-$vc_pages = function_exists( 'get_pages' ) ? get_pages() : array();
-$vc_pages = is_array( $vc_pages ) ? $vc_pages : array();
+$virtualcode_click_to_chat_pages = function_exists( 'get_pages' ) ? get_pages() : array();
+$virtualcode_click_to_chat_pages = is_array( $virtualcode_click_to_chat_pages ) ? $virtualcode_click_to_chat_pages : array();
 
 // Days list.
-$vc_days = array(
+$virtualcode_click_to_chat_days = array(
 	'monday'    => __( 'Monday', 'virtualcode-click-to-chat' ),
 	'tuesday'   => __( 'Tuesday', 'virtualcode-click-to-chat' ),
 	'wednesday' => __( 'Wednesday', 'virtualcode-click-to-chat' ),
@@ -74,7 +74,7 @@ $vc_days = array(
 								id="vc_page_targeting_all"
 								name="virtualcode_click_to_chat_settings[page_targeting_mode]"
 								value="all"
-								<?php checked( $vc_page_targeting_mode, 'all' ); ?>
+								<?php checked( $virtualcode_click_to_chat_page_targeting_mode, 'all' ); ?>
 							/>
 							<?php esc_html_e( 'Entire Website', 'virtualcode-click-to-chat' ); ?>
 						</label>
@@ -85,7 +85,7 @@ $vc_days = array(
 								id="vc_page_targeting_include"
 								name="virtualcode_click_to_chat_settings[page_targeting_mode]"
 								value="include"
-								<?php checked( $vc_page_targeting_mode, 'include' ); ?>
+								<?php checked( $virtualcode_click_to_chat_page_targeting_mode, 'include' ); ?>
 							/>
 							<?php esc_html_e( 'Include Specific Pages', 'virtualcode-click-to-chat' ); ?>
 						</label>
@@ -96,7 +96,7 @@ $vc_days = array(
 								id="vc_page_targeting_exclude"
 								name="virtualcode_click_to_chat_settings[page_targeting_mode]"
 								value="exclude"
-								<?php checked( $vc_page_targeting_mode, 'exclude' ); ?>
+								<?php checked( $virtualcode_click_to_chat_page_targeting_mode, 'exclude' ); ?>
 							/>
 							<?php esc_html_e( 'Exclude Specific Pages', 'virtualcode-click-to-chat' ); ?>
 						</label>
@@ -105,23 +105,23 @@ $vc_days = array(
 			</tr>
 
 			<!-- Include Pages - Disabled when not in Include mode -->
-			<tr id="vc-include-pages-row" class="vc-page-targeting-dependent" style="<?php echo 'include' !== $vc_page_targeting_mode ? 'opacity:0.6;' : ''; ?>">
+			<tr id="vc-include-pages-row" class="vc-page-targeting-dependent" style="<?php echo 'include' !== $virtualcode_click_to_chat_page_targeting_mode ? 'opacity:0.6;' : ''; ?>">
 				<th scope="row"><?php esc_html_e( 'Include Pages', 'virtualcode-click-to-chat' ); ?></th>
 				<td>
 					<div class="vc-page-checkboxes" style="max-width: 450px;">
-						<?php if ( empty( $vc_pages ) ) : ?>
+						<?php if ( empty( $virtualcode_click_to_chat_pages ) ) : ?>
 							<p class="description"><?php esc_html_e( 'No pages found.', 'virtualcode-click-to-chat' ); ?></p>
 						<?php else : ?>
-							<?php foreach ( $vc_pages as $vc_page ) : ?>
+							<?php foreach ( $virtualcode_click_to_chat_pages as $virtualcode_click_to_chat_page ) : ?>
 								<label style="display:block; margin-bottom:4px;">
 									<input
 										type="checkbox"
 										name="virtualcode_click_to_chat_settings[include_pages][]"
-										value="<?php echo esc_attr( $vc_page->ID ); ?>"
-										<?php checked( in_array( (int) $vc_page->ID, $vc_include_pages, true ) ); ?>
-										<?php echo 'include' !== $vc_page_targeting_mode ? 'disabled' : ''; ?>
+										value="<?php echo esc_attr( $virtualcode_click_to_chat_page->ID ); ?>"
+										<?php checked( in_array( (int) $virtualcode_click_to_chat_page->ID, $virtualcode_click_to_chat_include_pages, true ) ); ?>
+										<?php echo 'include' !== $virtualcode_click_to_chat_page_targeting_mode ? 'disabled' : ''; ?>
 									/>
-									<?php echo esc_html( $vc_page->post_title ); ?>
+									<?php echo esc_html( $virtualcode_click_to_chat_page->post_title ); ?>
 								</label>
 							<?php endforeach; ?>
 						<?php endif; ?>
@@ -131,23 +131,23 @@ $vc_days = array(
 			</tr>
 
 			<!-- Exclude Pages - Disabled when not in Exclude mode -->
-			<tr id="vc-exclude-pages-row" class="vc-page-targeting-dependent" style="<?php echo 'exclude' !== $vc_page_targeting_mode ? 'opacity:0.6;' : ''; ?>">
+			<tr id="vc-exclude-pages-row" class="vc-page-targeting-dependent" style="<?php echo 'exclude' !== $virtualcode_click_to_chat_page_targeting_mode ? 'opacity:0.6;' : ''; ?>">
 				<th scope="row"><?php esc_html_e( 'Exclude Pages', 'virtualcode-click-to-chat' ); ?></th>
 				<td>
 					<div class="vc-page-checkboxes" style="max-width: 450px;">
-						<?php if ( empty( $vc_pages ) ) : ?>
+						<?php if ( empty( $virtualcode_click_to_chat_pages ) ) : ?>
 							<p class="description"><?php esc_html_e( 'No pages found.', 'virtualcode-click-to-chat' ); ?></p>
 						<?php else : ?>
-							<?php foreach ( $vc_pages as $vc_page ) : ?>
+							<?php foreach ( $virtualcode_click_to_chat_pages as $virtualcode_click_to_chat_page ) : ?>
 								<label style="display:block; margin-bottom:4px;">
 									<input
 										type="checkbox"
 										name="virtualcode_click_to_chat_settings[exclude_pages][]"
-										value="<?php echo esc_attr( $vc_page->ID ); ?>"
-										<?php checked( in_array( (int) $vc_page->ID, $vc_exclude_pages, true ) ); ?>
-										<?php echo 'exclude' !== $vc_page_targeting_mode ? 'disabled' : ''; ?>
+										value="<?php echo esc_attr( $virtualcode_click_to_chat_page->ID ); ?>"
+										<?php checked( in_array( (int) $virtualcode_click_to_chat_page->ID, $virtualcode_click_to_chat_exclude_pages, true ) ); ?>
+										<?php echo 'exclude' !== $virtualcode_click_to_chat_page_targeting_mode ? 'disabled' : ''; ?>
 									/>
-									<?php echo esc_html( $vc_page->post_title ); ?>
+									<?php echo esc_html( $virtualcode_click_to_chat_page->post_title ); ?>
 								</label>
 							<?php endforeach; ?>
 						<?php endif; ?>
@@ -175,7 +175,7 @@ $vc_days = array(
 						type="number"
 						id="vc_delay_seconds"
 						name="virtualcode_click_to_chat_settings[delay_seconds]"
-						value="<?php echo esc_attr( $vc_delay_seconds ); ?>"
+						value="<?php echo esc_attr( $virtualcode_click_to_chat_delay_seconds ); ?>"
 						min="0"
 						max="300"
 						step="1"
@@ -208,12 +208,12 @@ $vc_days = array(
 						id="vc_business_hours_enabled"
 						name="virtualcode_click_to_chat_settings[business_hours_enabled]"
 						value="1"
-						<?php checked( $vc_business_enabled, true ); ?>
+						<?php checked( $virtualcode_click_to_chat_business_enabled, true ); ?>
 						aria-describedby="vc-business-hours-description"
 					/>
 					<span class="toggle-switch"></span>
 					<span class="toggle-text">
-						<?php echo $vc_business_enabled ? esc_html__( 'Enabled', 'virtualcode-click-to-chat' ) : esc_html__( 'Disabled', 'virtualcode-click-to-chat' ); ?>
+						<?php echo $virtualcode_click_to_chat_business_enabled ? esc_html__( 'Enabled', 'virtualcode-click-to-chat' ) : esc_html__( 'Disabled', 'virtualcode-click-to-chat' ); ?>
 					</span>
 				</label>
 				<p id="vc-business-hours-description" class="description">
@@ -222,20 +222,20 @@ $vc_days = array(
 			</td>
 		</tr>
 
-		<tr class="vc-business-hours-fields" id="vc-business-days-row" style="<?php echo ! $vc_business_enabled ? 'opacity:0.6;' : ''; ?>">
+		<tr class="vc-business-hours-fields" id="vc-business-days-row" style="<?php echo ! $virtualcode_click_to_chat_business_enabled ? 'opacity:0.6;' : ''; ?>">
 			<th scope="row"><?php esc_html_e( 'Business Days', 'virtualcode-click-to-chat' ); ?></th>
 			<td>
 				<div style="max-width: 450px;">
-					<?php foreach ( $vc_days as $vc_day_key => $vc_day_label ) : ?>
+					<?php foreach ( $virtualcode_click_to_chat_days as $virtualcode_click_to_chat_day_key => $virtualcode_click_to_chat_day_label ) : ?>
 						<label style="display:inline-block; margin-right:15px; margin-bottom:8px;">
 							<input
 								type="checkbox"
 								name="virtualcode_click_to_chat_settings[business_days][]"
-								value="<?php echo esc_attr( $vc_day_key ); ?>"
-								<?php checked( in_array( $vc_day_key, $vc_business_days, true ) ); ?>
-								<?php echo ! $vc_business_enabled ? 'disabled' : ''; ?>
+								value="<?php echo esc_attr( $virtualcode_click_to_chat_day_key ); ?>"
+								<?php checked( in_array( $virtualcode_click_to_chat_day_key, $virtualcode_click_to_chat_business_days, true ) ); ?>
+								<?php echo ! $virtualcode_click_to_chat_business_enabled ? 'disabled' : ''; ?>
 							/>
-							<?php echo esc_html( $vc_day_label ); ?>
+							<?php echo esc_html( $virtualcode_click_to_chat_day_label ); ?>
 						</label>
 					<?php endforeach; ?>
 				</div>
@@ -243,7 +243,7 @@ $vc_days = array(
 			</td>
 		</tr>
 
-		<tr class="vc-business-hours-fields" id="vc-business-time-row" style="<?php echo ! $vc_business_enabled ? 'opacity:0.6;' : ''; ?>">
+		<tr class="vc-business-hours-fields" id="vc-business-time-row" style="<?php echo ! $virtualcode_click_to_chat_business_enabled ? 'opacity:0.6;' : ''; ?>">
 			<th scope="row"><?php esc_html_e( 'Business Time', 'virtualcode-click-to-chat' ); ?></th>
 			<td>
 				<label for="vc_business_start_time" style="margin-right:20px;">
@@ -252,8 +252,8 @@ $vc_days = array(
 						type="time"
 						id="vc_business_start_time"
 						name="virtualcode_click_to_chat_settings[business_start_time]"
-						value="<?php echo esc_attr( $vc_business_start_time ); ?>"
-						<?php echo ! $vc_business_enabled ? 'disabled' : ''; ?>
+						value="<?php echo esc_attr( $virtualcode_click_to_chat_business_start_time ); ?>"
+						<?php echo ! $virtualcode_click_to_chat_business_enabled ? 'disabled' : ''; ?>
 						aria-describedby="vc-business-time-description"
 					/>
 				</label>
@@ -264,8 +264,8 @@ $vc_days = array(
 						type="time"
 						id="vc_business_end_time"
 						name="virtualcode_click_to_chat_settings[business_end_time]"
-						value="<?php echo esc_attr( $vc_business_end_time ); ?>"
-						<?php echo ! $vc_business_enabled ? 'disabled' : ''; ?>
+						value="<?php echo esc_attr( $virtualcode_click_to_chat_business_end_time ); ?>"
+						<?php echo ! $virtualcode_click_to_chat_business_enabled ? 'disabled' : ''; ?>
 					/>
 				</label>
 				<p id="vc-business-time-description" class="description">
