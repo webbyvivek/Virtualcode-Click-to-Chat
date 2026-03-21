@@ -8,16 +8,16 @@
 defined( 'ABSPATH' ) || exit;
 
 // Fetch saved options and defaults.
-$vc_defaults = virtualcode_click_to_chat_get_default_options();
-$vc_options  = (array) get_option( 'virtualcode_click_to_chat_settings', $vc_defaults );
-$vc_options  = wp_parse_args( $vc_options, $vc_defaults );
+$virtualcode_click_to_chat_defaults = virtualcode_click_to_chat_get_default_options();
+$virtualcode_click_to_chat_options  = (array) get_option( 'virtualcode_click_to_chat_settings', $virtualcode_click_to_chat_defaults );
+$virtualcode_click_to_chat_options  = wp_parse_args( $virtualcode_click_to_chat_options, $virtualcode_click_to_chat_defaults );
 
 // Size controls.
-$vc_icon_size = isset( $vc_options['icon_size'] ) ? absint( $vc_options['icon_size'] ) : 20;
-$vc_text_size = isset( $vc_options['text_size'] ) ? absint( $vc_options['text_size'] ) : 14;
+$virtualcode_click_to_chat_icon_size = isset( $virtualcode_click_to_chat_options['icon_size'] ) ? absint( $virtualcode_click_to_chat_options['icon_size'] ) : 20;
+$virtualcode_click_to_chat_text_size = isset( $virtualcode_click_to_chat_options['text_size'] ) ? absint( $virtualcode_click_to_chat_options['text_size'] ) : 14;
 
 // Current position - FIXED: Use prefixed variable name
-$vc_current_position = isset( $vc_options['position'] ) ? $vc_options['position'] : 'right';
+$virtualcode_click_to_chat_current_position = isset( $virtualcode_click_to_chat_options['position'] ) ? $virtualcode_click_to_chat_options['position'] : 'right';
 ?>
 
 <form method="post" action="options.php" id="vc-appearance-form">
@@ -43,9 +43,9 @@ $vc_current_position = isset( $vc_options['position'] ) ? $vc_options['position'
 				name="virtualcode_click_to_chat_settings[position]" 
 				id="vc_position_left" 
 				value="left" 
-				<?php checked( $vc_current_position, 'left' ); ?>
+				<?php checked( $virtualcode_click_to_chat_current_position, 'left' ); ?>
 			>
-			<label for="vc_position_left" class="toggle-left <?php echo $vc_current_position === 'left' ? 'active' : ''; ?>">
+			<label for="vc_position_left" class="toggle-left <?php echo $virtualcode_click_to_chat_current_position === 'left' ? 'active' : ''; ?>">
 				<?php esc_html_e( 'Left', 'virtualcode-click-to-chat' ); ?>
 			</label>
 
@@ -54,9 +54,9 @@ $vc_current_position = isset( $vc_options['position'] ) ? $vc_options['position'
 				name="virtualcode_click_to_chat_settings[position]" 
 				id="vc_position_right" 
 				value="right" 
-				<?php checked( $vc_current_position, 'right' ); ?>
+				<?php checked( $virtualcode_click_to_chat_current_position, 'right' ); ?>
 			>
-			<label for="vc_position_right" class="toggle-right <?php echo $vc_current_position === 'right' ? 'active' : ''; ?>">
+			<label for="vc_position_right" class="toggle-right <?php echo $virtualcode_click_to_chat_current_position === 'right' ? 'active' : ''; ?>">
 				<?php esc_html_e( 'Right', 'virtualcode-click-to-chat' ); ?>
 			</label>
 		</div>
@@ -76,7 +76,7 @@ $vc_current_position = isset( $vc_options['position'] ) ? $vc_options['position'
 							type="number"
 							id="vc_gap"
 							name="virtualcode_click_to_chat_settings[gap]"
-							value="<?php echo esc_attr( $vc_options['gap'] ); ?>"
+							value="<?php echo esc_attr( $virtualcode_click_to_chat_options['gap'] ); ?>"
 							min="0"
 							step="1"
 							class="small-text"
@@ -92,7 +92,7 @@ $vc_current_position = isset( $vc_options['position'] ) ? $vc_options['position'
 							type="number"
 							id="vc_side_gap"
 							name="virtualcode_click_to_chat_settings[side_gap]"
-							value="<?php echo esc_attr( $vc_options['side_gap'] ); ?>"
+							value="<?php echo esc_attr( $virtualcode_click_to_chat_options['side_gap'] ); ?>"
 							min="0"
 							step="1"
 							class="small-text"
@@ -114,7 +114,7 @@ $vc_current_position = isset( $vc_options['position'] ) ? $vc_options['position'
 						type="text"
 						id="vc_bg_color"
 						name="virtualcode_click_to_chat_settings[bg_color]"
-						value="<?php echo esc_attr( $vc_options['bg_color'] ); ?>"
+						value="<?php echo esc_attr( $virtualcode_click_to_chat_options['bg_color'] ); ?>"
 						class="vc-color-field"
 						data-default-color="#25D366"
 					/>
@@ -147,7 +147,7 @@ $vc_current_position = isset( $vc_options['position'] ) ? $vc_options['position'
 								id="vc_icon_only_yes"
 								name="virtualcode_click_to_chat_settings[icon_only]"
 								value="1"
-								<?php checked( ! empty( $vc_options['icon_only'] ), 1 ); ?>
+								<?php checked( ! empty( $virtualcode_click_to_chat_options['icon_only'] ), 1 ); ?>
 							/>
 							<?php esc_html_e( 'Icon Only', 'virtualcode-click-to-chat' ); ?>
 						</label>
@@ -158,7 +158,7 @@ $vc_current_position = isset( $vc_options['position'] ) ? $vc_options['position'
 								id="vc_icon_only_no"
 								name="virtualcode_click_to_chat_settings[icon_only]"
 								value="0"
-								<?php checked( empty( $vc_options['icon_only'] ), 1 ); ?>
+								<?php checked( empty( $virtualcode_click_to_chat_options['icon_only'] ), 1 ); ?>
 							/>
 							<?php esc_html_e( 'Icon + Text', 'virtualcode-click-to-chat' ); ?>
 						</label>
@@ -177,7 +177,7 @@ $vc_current_position = isset( $vc_options['position'] ) ? $vc_options['position'
 						type="text"
 						id="vc_button_text"
 						name="virtualcode_click_to_chat_settings[button_text]"
-						value="<?php echo esc_attr( $vc_options['button_text'] ); ?>"
+						value="<?php echo esc_attr( $virtualcode_click_to_chat_options['button_text'] ); ?>"
 						class="regular-text"
 						placeholder="<?php esc_attr_e( 'Chat with us', 'virtualcode-click-to-chat' ); ?>"
 						style="max-width: 450px;"
@@ -196,7 +196,7 @@ $vc_current_position = isset( $vc_options['position'] ) ? $vc_options['position'
 						type="text"
 						id="vc_text_color"
 						name="virtualcode_click_to_chat_settings[text_color]"
-						value="<?php echo esc_attr( $vc_options['text_color'] ); ?>"
+						value="<?php echo esc_attr( $virtualcode_click_to_chat_options['text_color'] ); ?>"
 						class="vc-color-field"
 						data-default-color="#ffffff"
 					/>
@@ -214,7 +214,7 @@ $vc_current_position = isset( $vc_options['position'] ) ? $vc_options['position'
 						type="number"
 						id="vc_text_size"
 						name="virtualcode_click_to_chat_settings[text_size]"
-						value="<?php echo esc_attr( $vc_text_size ); ?>"
+						value="<?php echo esc_attr( $virtualcode_click_to_chat_text_size ); ?>"
 						min="10"
 						max="32"
 						step="1"
@@ -235,7 +235,7 @@ $vc_current_position = isset( $vc_options['position'] ) ? $vc_options['position'
 						type="number"
 						id="vc_icon_size"
 						name="virtualcode_click_to_chat_settings[icon_size]"
-						value="<?php echo esc_attr( $vc_icon_size ); ?>"
+						value="<?php echo esc_attr( $virtualcode_click_to_chat_icon_size ); ?>"
 						min="12"
 						max="64"
 						step="1"
