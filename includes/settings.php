@@ -281,29 +281,3 @@ function virtualcode_click_to_chat_get_option( $key = '', $default = null ) {
 }
 
 endif;
-
-// Backward compatibility for old function
-if ( ! function_exists( 'chatlink_get_option' ) ) :
-function chatlink_get_option( $key = '', $default = null ) {
-	return virtualcode_click_to_chat_get_option( $key, $default );
-}
-endif;
-
-/**
- * Debug helper - Log settings (only when WP_DEBUG is enabled)
- * FIXED: Removed debug code for production
- * 
- * @param mixed $message Message to log (disabled in production)
- */
-function virtualcode_click_to_chat_debug_log( $message ) {
-	// Debug function disabled for production
-	// Keep empty function for backward compatibility
-	return;
-}
-
-// Backward compatibility for debug function
-if ( ! function_exists( 'chatlink_debug_log' ) ) :
-function chatlink_debug_log( $message ) {
-	virtualcode_click_to_chat_debug_log( $message );
-}
-endif;
