@@ -202,10 +202,10 @@ function virtualcode_click_to_chat_enqueue_admin_assets( $hook ) {
 		}
 	}
 	
-	// Localize script for admin
+	// Localize script for admin - UPDATED: vcAdmin → virtualcodeClickToChatAdmin
 	wp_localize_script(
 		'vc-admin',
-		'vcAdmin',
+		'virtualcodeClickToChatAdmin',
 		array(
 			'currentTab' => $current_tab,
 			'strings'    => array(
@@ -253,10 +253,10 @@ function virtualcode_click_to_chat_enqueue_frontend_assets() {
 		true
 	);
 
-	// Localize script for frontend
+	// Localize script for frontend - UPDATED: vcFrontend → virtualcodeClickToChatFrontend
 	wp_localize_script(
 		'vc-frontend',
-		'vcFrontend',
+		'virtualcodeClickToChatFrontend',
 		array(
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			'nonce'   => wp_create_nonce( 'vc_frontend_nonce' ),
