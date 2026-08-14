@@ -1,4 +1,4 @@
-# Virtualcode Click to Chat
+# Click to Chat by Virtualcode
 
 A lightweight WordPress plugin that adds a floating WhatsApp chat button to your website. Let visitors start a conversation with you instantly with just one click!
 
